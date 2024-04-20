@@ -1,0 +1,61 @@
+<!doctype html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.tailwindcss.com"> </script>
+    <title>{% block title %} {% endblock %} | library</title>
+</head>
+
+<body>
+    <nav class="py-6 px-6 flex justify-between items-center border-b border-gray-200">
+        <a href="/" class="text-xl font-semibold">ABC LIBRARY</a>
+
+        <div class="space-x-6">
+            <a href="{% url 'item:new' %}" class="text-lg font-semibold hover:text-gray-500">+Add Books</a>
+            <a href="{% url 'item:items' %}" class="text-lg font-semibold hover:text-gray-500">Browse</a>
+
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'dashboard:index' %}"
+                class="px-6 py-3 text-lg font-semibold bg-gray-700 text-white rounded-xl hover:bg-gray-900">Your
+                Books</a>
+            <a href="{% url 'core:logout' %}"
+                class="px-6 py-3 text-lg font-semibold bg-sky-900 text-white rounded-xl hover:bg-sky-950">Log out</a>
+            {% else %}
+            <a href="{% url 'core:signup' %}"
+                class="px-6 py-3 text-lg font-semibold bg-sky-900 text-white rounded-xl hover:bg-sky-950">Sign up</a>
+            <a href="{% url 'core:login' %}"
+                class="px-6 py-3 text-lg font-semibold bg-gray-700 text-white rounded x-l hover:bg-gray-900">Log in</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <div class="px-6 py-6">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <footer class="py-6 px-6 flex justify-between bg-zinc-800 rounded-xl">
+        <div class="w-2/3 pr-10">
+            <h3 class="mb-5 font-semibold text-gray-400">About us</h3>
+
+            <p class="text-lg text-gray-500"> The Library of ABC is the nation's oldest federal cultural institution,
+                and it serves as the research arm of the country </p>
+        </div>
+
+        <div class="w-1/6">
+            <h3 class="mb-5 font-semibold text-gray-400">Menu</h3>
+
+            <ul class="space-y-2">
+                <li><a href="{% url 'core:contact' %}" class="tex-lg text-teal-500 hover:text-teal-700">Contact</a></li>
+                <li><a href="#" class="tex-lg text-teal-500 hover:text-teal-700">Privacy policy</a></li>
+                <li><a href="#" class="tex-lg text-teal-500 hover:text-teal-700">Terms of service</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+
+</html>
